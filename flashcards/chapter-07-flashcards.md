@@ -1,0 +1,16 @@
+## Chapter 7: NLP for Human-Robot Interaction — Flashcards
+
+| # | Front (Question) | Back (Answer) |
+|---|-----------------|---------------|
+| 1 | Order of stages in a standard voice-command robot pipeline? | ASR → NLU → Dialogue Management → Action Planning/Execution → TTS (feedback). Exam tip: NLU extracts intent+slots; dialogue manager resolves ambiguity/context before grounding into action. |
+| 2 | What does ASR do and what is its output? | Automatic Speech Recognition converts the raw audio waveform into a text transcript. Exam tip: ASR errors propagate downstream — exam often asks 'where in the pipeline did the failure occur'. |
+| 3 | NLU vs NLG — what's the difference? | NLU extracts intent/entities from the user's text input; NLG generates the robot's text response. Exam tip: TTS then converts NLG output into audible speech. |
+| 4 | Define the grounding problem in HRI. | Mapping abstract language symbols (e.g., 'cup', 'there') to concrete physical referents/actions the robot can perceive and execute. Exam tip: solved with joint vision-language embeddings, not dictionary lookups. |
+| 5 | What should happen when NLU intent confidence is below the configured threshold? | Trigger a clarification dialogue instead of guessing. Exam tip: 'proceed with best guess' is the most common wrong-answer trap. |
+| 6 | Role of the safety guardrail layer in LLM-to-robot-action pipelines? | Validates/filters LLM-generated action sequences against kinematic limits, collision avoidance, and task policy before execution. Exam tip: answers treating LLM output as directly executable are always wrong. |
+| 7 | What does the dialogue management component handle? | Tracks conversation state/context (resolving pronouns like 'it', 'that one') and decides the next system action — clarify, confirm, or proceed. Exam tip: distinct from NLU, which parses only a single utterance. |
+| 8 | Example of an anaphora resolution challenge in robot dialogue? | 'Pick up the red block, then put it on the shelf' — 'it' must be resolved to 'red block' across turns. Exam tip: tested as a dialogue management function, not NLU. |
+| 9 | What happens when an LLM generates an action beyond the robot's physical capability (e.g., 'fly to the shelf')? | A capability/grounding-check layer rejects the infeasible action, requesting clarification or substituting a feasible alternative. Exam tip: capability grounding is distinct from safety grounding — both are required. |
+| 10 | Two main conditions that trigger a clarification dialogue? | 1) NLU confidence below threshold. 2) Multiple plausible referents / ambiguous grounding (e.g., two blocks match 'the block'). Exam tip: ambiguous-object scenarios always point to clarification, not guessing. |
+| 11 | Purpose of the TTS stage in the HRI pipeline? | Converts the robot's generated text response (NLG output) into spoken audio feedback to the human. Exam tip: TTS is the final stage, closing the conversational loop. |
+| 12 | Why must LLM-generated robot commands never execute directly without a safety layer? | LLMs can hallucinate unsafe, infeasible, or policy-violating actions (e.g., literal interpretation of 'quickly' causing damage); a guardrail layer must validate against safety and capability constraints first. Exam tip: 'trust LLM output directly' is always the wrong answer. |

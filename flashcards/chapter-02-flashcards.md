@@ -1,0 +1,16 @@
+## Chapter 2: Autonomous Systems and Intelligent Agents — Flashcards
+
+| # | Front (Question) | Back (Answer) |
+|---|-----------------|---------------|
+| 1 | SAE Level 2 vs Level 3 automation — key difference? | L2 = driver must continuously monitor the environment (hands/eyes on). L3 = driver can disengage attention until the system requests takeover. Exam tip: 'eyes on' = L2, 'eyes off until requested' = L3. |
+| 2 | What does SLAM stand for and solve? | Simultaneous Localization And Mapping — building a map of an unknown environment while tracking the robot's own position within that map at the same time. |
+| 3 | Loop closure in SLAM — what is it? | Detecting that the robot has returned to a previously visited location, used to correct accumulated drift in the map and pose estimate. Exam tip: without loop closure, SLAM maps drift unboundedly over long trajectories. |
+| 4 | Classic deliberative robotics control loop — stage order? | Sense → Plan → Act. Exam tip: contrasts with purely reactive 'Sense → Act' loops (e.g., subsumption architecture) that skip explicit planning. |
+| 5 | Agentic AI loop (LLM-based agent) — stage order? | Perceive/Observe → Reason (plan or chain-of-thought) → Act (tool/actuator call) → Observe result, then repeat. Exam tip: maps onto sense-reason-act, but the reasoning step runs in seconds vs. millisecond-scale control loops. |
+| 6 | Path planning vs reactive navigation — key tradeoff? | Path planning (A*, RRT) is global, map-based, and near-optimal but computationally heavier. Reactive navigation (DWA, potential fields) is local, fast, low-compute, but can get stuck in local minima. |
+| 7 | Potential fields local minima trap — what is it? | A reactive navigation failure where attractive (goal) and repulsive (obstacle) forces cancel out, causing the robot to stall before reaching the goal. Exam tip: classic gotcha about reactive navigation limitations. |
+| 8 | Extended Kalman Filter (EKF) — primary use? | Sensor fusion/state estimation for nonlinear systems (e.g., fusing IMU + GPS + wheel odometry) by linearizing around the current estimate. Exam tip: EKF assumes a unimodal Gaussian belief. |
+| 9 | Particle Filter vs EKF — when to prefer the Particle Filter? | When the robot's belief about its state is multimodal or highly non-Gaussian (e.g., global localization in a symmetric environment). EKF is lighter-weight but assumes a single Gaussian belief. |
+| 10 | POMDP — what does it model? | Partially Observable Markov Decision Process — a decision-making framework where the agent cannot directly observe the true state, only noisy/partial observations. Exam tip: formalizes decision-making under uncertainty for autonomous agents. |
+| 11 | Autonomy spectrum order from least to most independent? | Teleoperated → Supervised/Assisted → Semi-autonomous → Fully autonomous. Exam tip: the midpoint 'supervised' means the system acts independently but a human can monitor and intervene. |
+| 12 | Why fuse IMU + GPS instead of using either alone? | IMU has a high update rate but drifts over time (integration error accumulates); GPS is absolute but low-rate and can drop out (indoors/urban canyons). Fusion (e.g., via EKF) combines high-rate IMU with periodic GPS correction for a stable, low-drift estimate. |
